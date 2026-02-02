@@ -1,0 +1,115 @@
+================================================================================
+Process with glob pattern
+================================================================================
+
+api **/*.go: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Process with exclusion pattern
+================================================================================
+
+api **/*.go !**_test.go: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob))
+      (exclusion_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Process with multiple patterns and exclusions
+================================================================================
+
+api **/*.go !**_test.go !vendor/**: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob))
+      (exclusion_pattern
+        (bare_glob))
+      (exclusion_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Process with brace expansion pattern
+================================================================================
+
+frontend web/**/*.{ts,tsx,css,html}: npm run dev
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Process with bare filename pattern
+================================================================================
+
+echo Procfile: echo "Procfile changed"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Process with patterns and options mixed
+================================================================================
+
+api **/*.go !**_test.go after=postgres debounce=500ms: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob))
+      (exclusion_pattern
+        (bare_glob))
+      (option
+        (option_key)
+        (option_value))
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))

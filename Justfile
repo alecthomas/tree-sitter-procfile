@@ -1,0 +1,2 @@
+_help:
+    @just -l

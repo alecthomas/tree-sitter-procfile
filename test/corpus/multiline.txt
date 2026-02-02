@@ -1,0 +1,45 @@
+================================================================================
+Multiline command block
+================================================================================
+
+build!:
+    echo "Building..."
+    go build -o bin/app ./cmd/app
+    echo "Done"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name))
+    (multiline_block
+      (block_line)
+      (block_line)
+      (block_line))))
+
+================================================================================
+Multiline block with patterns
+================================================================================
+
+migrate! **/*.sql dir=./db after=postgres:
+    echo "Running migrations..."
+    psql -f schema.sql
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob))
+      (option
+        (option_key)
+        (option_value))
+      (option
+        (option_key)
+        (option_value)))
+    (multiline_block
+      (block_line)
+      (block_line))))

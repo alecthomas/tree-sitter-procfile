@@ -1,0 +1,14 @@
+{
+  "grammars": [
+    {
+      "name": "procfile",
+      "scope": "source.procfile",
+      "path": ".",
+      "file-types": ["Procfile"],
+      "injection-regex": "procfile"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "tree-sitter-procfile",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for Procfile syntax (proctor-compatible)",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "procfile",
+    "proctor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alecthomas/proctor.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.0.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.26.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.22.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.procfile",
+      "file-types": [
+        "Procfile"
+      ],
+      "injection-regex": "procfile"
+    }
+  ]
+}

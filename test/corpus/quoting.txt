@@ -1,0 +1,71 @@
+================================================================================
+Double quoted string in command
+================================================================================
+
+api: echo "hello world"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name))
+    (execution
+      (command))))
+
+================================================================================
+Single quoted option value
+================================================================================
+
+api dir='./my dir': go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value))
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Double quoted option value
+================================================================================
+
+api dir="./my dir": go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value))
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))
+
+================================================================================
+Quoted pattern
+================================================================================
+
+api "src/**/*.go": go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (glob_pattern
+        (bare_glob)))
+    (execution
+      (command))))

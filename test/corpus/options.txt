@@ -1,0 +1,164 @@
+================================================================================
+Process with ready option (port)
+================================================================================
+
+postgres ready=5432: docker run postgres
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with ready option (HTTP)
+================================================================================
+
+api ready=http:8080/health: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with after option
+================================================================================
+
+api after=postgres: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with multiple dependencies
+================================================================================
+
+api after=postgres,redis: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with debounce option
+================================================================================
+
+api debounce=500ms: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with dir option
+================================================================================
+
+frontend dir=./web: npm run dev
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with signal option
+================================================================================
+
+api signal=INT: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with shutdown option
+================================================================================
+
+api shutdown=10s: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Process with multiple options
+================================================================================
+
+api after=postgres ready=http:8080/health debounce=1s signal=INT shutdown=10s: go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value))
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
