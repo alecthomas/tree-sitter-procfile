@@ -177,7 +177,7 @@
     },
     "_bare_option_value": {
       "type": "PATTERN",
-      "value": "[^\\s:]+"
+      "value": "[^\\s:\"']+"
     },
     "glob_pattern": {
       "type": "CHOICE",

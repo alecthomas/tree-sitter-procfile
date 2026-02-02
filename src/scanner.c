@@ -227,15 +227,19 @@ static bool is_glob_char(int32_t c) {
 }
 
 static bool is_bare_glob_char(int32_t c) {
-  // Characters valid in a glob pattern (not whitespace, colon, or !)
+  // Characters valid in a glob pattern (not whitespace, colon, !, or quotes)
   // ! is excluded because it starts exclusion patterns
-  return c != ' ' && c != '\t' && c != '\n' && c != ':' && c != '!' && c != 0 && c != -1;
+  // Quotes are excluded so grammar can handle quoted strings
+  return c != ' ' && c != '\t' && c != '\n' && c != ':' && c != '!' && 
+         c != '"' && c != '\'' && c != 0 && c != -1;
 }
 
 // Scan a bare glob pattern - either contains glob chars, or is an identifier NOT followed by '='
 static bool scan_bare_glob(TSLexer *lexer) {
+  // Don't match if starting with quote - let grammar handle quoted strings
   if (is_space(lexer->lookahead) || lexer->lookahead == ':' || 
-      lexer->lookahead == '\n' || lexer->eof(lexer)) {
+      lexer->lookahead == '\n' || lexer->lookahead == '"' || 
+      lexer->lookahead == '\'' || lexer->eof(lexer)) {
     return false;
   }
   

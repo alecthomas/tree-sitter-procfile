@@ -27,9 +27,8 @@ api dir='./my dir': go run ./cmd/api
       (process_name)
       (option
         (option_key)
-        (option_value))
-      (glob_pattern
-        (bare_glob)))
+        (option_value
+          (single_quoted_string))))
     (execution
       (command))))
 
@@ -47,9 +46,8 @@ api dir="./my dir": go run ./cmd/api
       (process_name)
       (option
         (option_key)
-        (option_value))
-      (glob_pattern
-        (bare_glob)))
+        (option_value
+          (double_quoted_string))))
     (execution
       (command))))
 
@@ -66,6 +64,90 @@ api "src/**/*.go": go run ./cmd/api
     (declaration
       (process_name)
       (glob_pattern
-        (bare_glob)))
+        (double_quoted_string)))
+    (execution
+      (command))))
+
+================================================================================
+Quoted option value with spaces
+================================================================================
+
+server after="echo hello": start
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value
+          (double_quoted_string))))
+    (execution
+      (command))))
+
+================================================================================
+Multiple options with quoted values
+================================================================================
+
+server after="db init" dir="./my app": start
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value
+          (double_quoted_string)))
+      (option
+        (option_key)
+        (option_value
+          (double_quoted_string))))
+    (execution
+      (command))))
+
+================================================================================
+Mixed quoted and unquoted option values
+================================================================================
+
+server after="echo hello" dir=src ready=http:8080: start
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (option
+        (option_key)
+        (option_value
+          (double_quoted_string)))
+      (option
+        (option_key)
+        (option_value))
+      (option
+        (option_key)
+        (option_value)))
+    (execution
+      (command))))
+
+================================================================================
+Quoted glob pattern in exclusion
+================================================================================
+
+api !"test/**/*.go": go run ./cmd/api
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (process_definition
+    (declaration
+      (process_name)
+      (exclusion_pattern
+        (double_quoted_string)))
     (execution
       (command))))

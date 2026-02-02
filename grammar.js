@@ -68,7 +68,7 @@ module.exports = grammar({
       $._bare_option_value,
     ),
 
-    _bare_option_value: $ => /[^\s:]+/,
+    _bare_option_value: $ => /[^\s:"']+/,
 
     glob_pattern: $ => choice(
       $._quoted_string,
